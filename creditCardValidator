@@ -22,11 +22,7 @@ int main(){
         }
     }
 
-    result = sumOddDigit(card_number) + sumEvenDigit(card_number);
-    //cout << "Odd: " << sumOddDigit(card_number) << endl;
-    //cout << "Even: " << sumEvenDigit(card_number) << endl;
-    
-    
+    result = sumOddDigit(card_number) + sumEvenDigit(card_number);    
 
     cout << "Computed sum: " << result << endl; 
 
@@ -42,7 +38,6 @@ int sumOddDigit(const string card_number){
     int oddSum = 0;
     for(int i = card_number.size() - 1; i >= 0; i-=2){
         int digit = card_number[i] - '0';
-        cout << "Debug: Char at index " << i << " is '" << card_number[i] << "' which becomes " << digit << endl;
         oddSum += digit;
     }
     return oddSum;
