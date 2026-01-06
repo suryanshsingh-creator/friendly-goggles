@@ -1,0 +1,59 @@
+#include <iostream>
+#include <limits>
+using namespace std;
+int sumOddDigit(const string card_number);
+int sumEvenDigit(const string card_number);
+
+int main(){
+    string card_number;
+    int result = 0;
+
+    cout << "Enter your card number: ";
+    cin >> card_number;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    cout << "Read input: '" << card_number << "' length=" << card_number.size() << "\n";
+    for(size_t i = 0; i < card_number.size(); ++i){
+        unsigned char c = card_number[i];
+        if(!isdigit(c)){
+            cout << "Error: non-digit character at index " << i << " -> '" << card_number[i] << "' (ASCII " << int(card_number[i]) << ")\n";
+            cout << "Make sure the input contains only digits (no stray chars or prompts).\n";
+            return 1;
+        }
+    }
+
+    result = sumOddDigit(card_number) + sumEvenDigit(card_number);
+    //cout << "Odd: " << sumOddDigit(card_number) << endl;
+    //cout << "Even: " << sumEvenDigit(card_number) << endl;
+    
+    
+
+    cout << "Computed sum: " << result << endl; 
+
+    if(result % 10 == 0){
+        cout << "It's a valid card number.\n";
+    }else{
+        cout << "It's not a valid card number.\n";
+    }
+return 0;
+}
+
+int sumOddDigit(const string card_number){
+    int oddSum = 0;
+    for(int i = card_number.size() - 1; i >= 0; i-=2){
+        int digit = card_number[i] - '0';
+        cout << "Debug: Char at index " << i << " is '" << card_number[i] << "' which becomes " << digit << endl;
+        oddSum += digit;
+    }
+    return oddSum;
+
+}
+
+int sumEvenDigit(const string card_number){
+    int even_sum = 0;
+    for(int i = card_number.size() - 2; i >= 0; i-=2){
+    int digit = (card_number[i] - '0') * 2;
+    even_sum += (digit > 9) ? (digit - 9) : digit;
+    }
+    return even_sum;
+}
